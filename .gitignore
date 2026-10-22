@@ -1,0 +1,17 @@
+# Build output
+out/
+bin/
+*.class
+sources.txt
+stubs/
+
+# Runtime data (each member keeps their own; see docs/DATA.md)
+data/
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+nbproject/private/
+.DS_Store
+Thumbs.db
