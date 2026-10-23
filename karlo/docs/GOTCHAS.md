@@ -25,3 +25,9 @@ Format: `### Title` → **Symptom** / **Cause** / **Fix**.
 **Symptom:** Every audit row shows `difference = 0`.
 **Cause:** The stock was overwritten with the counted value *before* `systemQuantity` was read.
 **Fix:** Read `systemQuantity` first, build the `StockAudit`, then set the new stock and save.
+
+### StackOverflowError on service instantiation
+**Symptom:** Program crashes with `java.lang.StackOverflowError` immediately when instantiating `InventoryService` or `OrderService`.
+**Cause:** `OrderService` default constructor calls `new InventoryService()`, while `InventoryService` default constructor called `new OrderService()`, creating infinite mutual recursion.
+**Fix:** Pass null in default constructor and instantiate lazily via `getOrderService()` only when `deleteMedicine` is invoked.
+Confirmed: 2026-10-23

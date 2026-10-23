@@ -8,7 +8,7 @@ Every file you create, with its purpose and milestone: [BLUEPRINT §4](../../doc
 ## Classes to build
 
 ### Model
-- [ ] `Medicine implements Storable`:
+- [x] `Medicine implements Storable`:
   - Every field from [DATA §3.2](../../docs/DATA.md#32-medicinestxt--owner-karlo) is private.
   - Setters guard invariants (no negative price or stock).
   - `public static final int DEFAULT_REORDER_LEVEL = 10;`
@@ -17,19 +17,19 @@ Every file you create, with its purpose and milestone: [BLUEPRINT §4](../../doc
   - `boolean isLowStock()` → `stockQuantity <= reorderLevel`.
   - `boolean isSellable(LocalDate today)` → `ACTIVE` and not expired.
   - `toFileLine()`
-- [ ] `MedicineCategory` (with `getLabel()`) and `MedicineStatus`. Constants are in [DATA §4](../../docs/DATA.md#4-enums).
-- [ ] `StockAudit implements Storable`, with fields from [DATA §3.3](../../docs/DATA.md#33-stock_auditstxt--owner-karlo).
+- [x] `MedicineCategory` (with `getLabel()`) and `MedicineStatus`. Constants are in [DATA §4](../../docs/DATA.md#4-enums).
+- [x] `StockAudit implements Storable`, with fields from [DATA §3.3](../../docs/DATA.md#33-stock_auditstxt--owner-karlo).
 
 ### Data
-- [ ] `MedicineRepository`: `findAll()`, `findById(id)` (`NotFoundException`), `save(medicine)` (replace or add), `delete(id)`, `nextId()` → `"MED-", 4`. A wrong column count throws `DataAccessException`.
-- [ ] `StockAuditRepository`: `findAll()`, `findByMedicine(id)`, `add(audit)` via `DataStore.append`, `nextId()` → `"AUD-", 6`.
+- [x] `MedicineRepository`: `findAll()`, `findById(id)` (`NotFoundException`), `save(medicine)` (replace or add), `delete(id)`, `nextId()` → `"MED-", 4`. A wrong column count throws `DataAccessException`.
+- [x] `StockAuditRepository`: `findAll()`, `findByMedicine(id)`, `add(audit)` via `DataStore.append`, `nextId()` → `"AUD-", 6`.
 
 ### Logic
-- [ ] `MedicineFilter`:
+- [x] `MedicineFilter`:
   - Optional `keyword`, `MedicineCategory category`, `Double minPrice`, `Double maxPrice`, `Boolean prescriptionRequired`, and `boolean sellableOnly`. `null` means "any".
   - `boolean matches(Medicine m, LocalDate today)` applies every non-null criterion (AND).
   - `validate()` enforces M9.
-- [ ] `InventoryService`. Admin methods start with `Session.getInstance().requireRole(Role.ADMIN)`.
+- [x] `InventoryService`. Admin methods start with `Session.getInstance().requireRole(Role.ADMIN)`.
   - `public static final int NEAR_EXPIRY_DAYS = 30;`
   - Pharmacist + admin:
     - `browseSellable()`: sorted by brand.
@@ -52,13 +52,13 @@ Every file you create, with its purpose and milestone: [BLUEPRINT §4](../../doc
     - `restoreStock(id, qty)`
 
     No role check on these three: both roles reach them through orders.
-- [ ] `InsufficientStockException extends PharmacyException`.
+- [x] `InsufficientStockException extends PharmacyException`.
 
 ### UI (all `extends BaseMenu`)
-- [ ] `MedicineBrowserMenu` (pharmacist): Browse all · Search & filter · View details.
-- [ ] `CatalogMenu` (admin): List all · Search & filter · View details · Add · Update · Discontinue/Reactivate · Delete.
-- [ ] `StockAuditMenu` (admin): Low-stock report · Expiry report · Record physical count · Update lot/expiry/reorder level · Audit history. Prints the alert summary line when opened.
-- [ ] Shared table printing: one helper in your folder (e.g. `ui/MedicineTable`) so every list looks the same.
+- [x] `MedicineBrowserMenu` (pharmacist): Browse all · Search & filter · View details.
+- [x] `CatalogMenu` (admin): List all · Search & filter · View details · Add · Update · Discontinue/Reactivate · Delete.
+- [x] `StockAuditMenu` (admin): Low-stock report · Expiry report · Record physical count · Update lot/expiry/reorder level · Audit history. Prints the alert summary line when opened.
+- [x] Shared table printing: one helper in your folder (e.g. `ui/MedicineTable`) so every list looks the same.
 
 ## Contracts
 
@@ -82,19 +82,19 @@ Every file you create, with its purpose and milestone: [BLUEPRINT §4](../../doc
 - **Singleton usage:** `DataStore.getInstance()`, `Session.getInstance()`.
 
 ## Definition of done (per feature)
-- [ ] Compiles together with all four folders.
-- [ ] Every rule M1–M12 that applies is enforced in the **service**.
-- [ ] Pharmacists never see expired or discontinued medicines; admins see them with flags.
-- [ ] Passes the [hostile-input checklist](../../docs/VALIDATION.md#4-hostile-input-checklist).
-- [ ] `data/medicines.txt` and `data/stock_audits.txt` lines match DATA.md.
+- [x] Compiles together with all four folders.
+- [x] Every rule M1–M12 that applies is enforced in the **service**.
+- [x] Pharmacists never see expired or discontinued medicines; admins see them with flags.
+- [x] Passes the [hostile-input checklist](../../docs/VALIDATION.md#4-hostile-input-checklist).
+- [x] `data/medicines.txt` and `data/stock_audits.txt` lines match DATA.md.
 - [ ] PR reviewed by Heather or Cameron.
 
 ## Progress
 | Milestone | Status |
 |---|---|
-| M0 Skeleton: empty `MedicineBrowserMenu`, `CatalogMenu`, `StockAuditMenu` | ☐ |
-| Model + repositories | ☐ |
-| M4 Catalog CRUD (add/list first, so others have test data) | ☐ |
-| `findSellable` / `reserveStock` / `restoreStock` for Cameron | ☐ |
-| M1 Browse · M2 Details · M3 Search & Filter | ☐ |
-| M5 Stock & Inventory Audit | ☐ |
+| M0 Skeleton: empty `MedicineBrowserMenu`, `CatalogMenu`, `StockAuditMenu` | [x] |
+| Model + repositories | [x] |
+| M4 Catalog CRUD (add/list first, so others have test data) | [x] |
+| `findSellable` / `reserveStock` / `restoreStock` for Cameron | [x] |
+| M1 Browse · M2 Details · M3 Search & Filter | [x] |
+| M5 Stock & Inventory Audit | [x] |
